@@ -1513,14 +1513,8 @@
     v = exc->moveVector.x;
     if ( v != 0 )
     {
-#ifdef TT_SUPPORT_SUBPIXEL_HINTING_MINIMAL
-      /* Exception to the post-IUP curfew: Allow the x component of */
-      /* diagonal moves, but only post-IUP.  DejaVu tries to adjust */
-      /* diagonal stems like on `Z' and `z' post-IUP.               */
-      if ( !exc->backward_compatibility )
-#endif
-        zone->cur[point].x = ADD_LONG( zone->cur[point].x,
-                                       FT_MulFix( distance, v ) );
+      zone->cur[point].x = ADD_LONG( zone->cur[point].x,
+                                     FT_MulFix( distance, v ) );
 
       zone->tags[point] |= FT_CURVE_TAG_TOUCH_X;
     }
@@ -1528,12 +1522,8 @@
     v = exc->moveVector.y;
     if ( v != 0 )
     {
-#ifdef TT_SUPPORT_SUBPIXEL_HINTING_MINIMAL
-      /* See `ttinterp.h' for details on backward compatibility mode. */
-      if ( exc->backward_compatibility != 0x7 )
-#endif
-        zone->cur[point].y = ADD_LONG( zone->cur[point].y,
-                                       FT_MulFix( distance, v ) );
+      zone->cur[point].y = ADD_LONG( zone->cur[point].y,
+                                     FT_MulFix( distance, v ) );
 
       zone->tags[point] |= FT_CURVE_TAG_TOUCH_Y;
     }
